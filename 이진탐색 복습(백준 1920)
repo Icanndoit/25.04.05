@@ -1,0 +1,45 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    
+    int* array, * find;
+    int arrlen, findlen;
+
+    cin >> arrlen;
+    array = new int[arrlen];
+    for (int i = 0; i < arrlen; i++)
+        cin >> array[i];
+    sort(array, array + arrlen);
+
+    cin >> findlen;
+    find = new int[findlen];
+    for (int i = 0; i < findlen; i++)
+        cin >> find[i];
+
+    for (int i = 0; i < findlen; i++)
+    {
+        int low = 0, high = arrlen - 1, out = 0;   // 존재시 1, 존재X시 0
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (array[mid] < find[i])
+                low = mid + 1;
+            else if (array[mid] > find[i])
+                high = mid - 1;
+            else {
+                out = 1;
+                break;
+            }
+        }
+        cout << out << "\n";
+    }
+
+
+    delete[]array;
+    delete[]find;
+    return 0;
+}
