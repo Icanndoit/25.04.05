@@ -1,0 +1,60 @@
+#include<iostream>
+using namespace std;
+
+struct Node {
+	int data;
+	Node* link;
+};
+
+struct Head {
+	Node* link;
+};
+
+void NewNode(Head* head, int i) {
+	Node* newnode = new Node;
+	newnode->data = i;
+	newnode->link = nullptr;
+	if (head->link == nullptr)
+		head->link = newnode;
+	else {
+		Node* tmp = head->link;
+		while (tmp->link != nullptr)
+			tmp = tmp->link;
+		tmp->link = newnode;
+	}
+}
+
+int last(Head* head,int size) {
+	while (size != 1)
+	{
+		Node* del = head->link;
+		head->link = del->link;
+		delete del;
+		size -= 1;
+		if (size != 1)
+		{
+			Node* end = head->link;  // 마지막으로 삽입될 노드
+			head->link = end->link;
+			Node* tmp = head->link;
+			while (tmp->link != nullptr)
+				tmp = tmp->link;
+			tmp->link = end;
+			end->link = nullptr;
+		}
+	}
+	return head->link->data;
+}
+
+int main() {
+	int size;
+	cin >> size;
+
+	Head head;  head.link = nullptr;
+	for (int i = 1; i <= size; i++)   // 리스트 생성
+		NewNode(&head, i);
+	
+	cout << last(&head, size) << "\n";
+
+
+	return 0;
+}
