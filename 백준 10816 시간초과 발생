@@ -1,0 +1,28 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+int main() {
+	vector<int>arr;
+	int* find, lenarr, lenfind;
+
+	cin >> lenarr;
+	for (int i = 0; i < lenarr; i++)
+	{
+		int data;  cin >> data;
+		arr.push_back(data);
+	}
+
+	cin >> lenfind;
+	find = new int[lenfind];
+	for (int i = 0; i < lenfind; i++)
+		cin >> find[i];
+	
+	for (int i = 0; i < lenfind; i++)
+		cout << count(arr.begin(), arr.end(), find[i]) << " ";
+
+
+	delete[]find;
+	return 0;
+}
